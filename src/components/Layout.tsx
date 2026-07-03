@@ -16,14 +16,20 @@ const navItems = [
 export function Sidebar() {
   const location = useLocation();
   const logout = useStore(state => state.logout);
+  const appName = useStore(state => state.appName);
+  const appLogo = useStore(state => state.appLogo);
 
   return (
     <aside className="hidden md:flex flex-col w-64 h-screen bg-[var(--color-surface)] border-r border-[var(--color-border)] fixed top-0 left-0">
       <div className="p-6 flex items-center space-x-3">
-        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-dark)] flex items-center justify-center">
-          <Zap className="text-white w-5 h-5" />
-        </div>
-        <span className="text-xl font-heading font-bold text-[var(--color-text-primary)]">MiningEnergy</span>
+        {appLogo ? (
+          <img src={appLogo} alt="Logo" className="w-8 h-8 rounded-lg object-cover" />
+        ) : (
+          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-dark)] flex items-center justify-center">
+            <Zap className="text-white w-5 h-5" />
+          </div>
+        )}
+        <span className="text-xl font-heading font-bold text-[var(--color-text-primary)]">{appName}</span>
       </div>
 
       <nav className="flex-1 px-4 py-6 space-y-1 overflow-y-auto">
@@ -94,14 +100,20 @@ export function MobileNav() {
 
 export function Topbar() {
   const user = useStore(state => state.user);
+  const appName = useStore(state => state.appName);
+  const appLogo = useStore(state => state.appLogo);
 
   return (
     <header className="h-16 md:h-20 bg-[var(--color-surface)] border-b border-[var(--color-border)] sticky top-0 z-40 flex items-center justify-between px-4 md:px-8">
       <div className="md:hidden flex items-center space-x-2">
-        <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-dark)] flex items-center justify-center">
-          <Zap className="text-white w-4 h-4" />
-        </div>
-        <span className="font-heading font-bold text-lg">MiningEnergy</span>
+        {appLogo ? (
+          <img src={appLogo} alt="Logo" className="w-7 h-7 rounded-lg object-cover" />
+        ) : (
+          <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-dark)] flex items-center justify-center">
+            <Zap className="text-white w-4 h-4" />
+          </div>
+        )}
+        <span className="font-heading font-bold text-lg">{appName}</span>
       </div>
 
       <div className="hidden md:block">

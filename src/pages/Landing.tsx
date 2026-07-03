@@ -6,6 +6,9 @@ import { useStore } from '../store/useStore';
 
 export default function Landing() {
   const isAuthenticated = useStore(state => state.isAuthenticated);
+  const appName = useStore(state => state.appName);
+
+  const appLogo = useStore(state => state.appLogo);
 
   if (isAuthenticated) {
     return <Navigate to="/dashboard" replace />;
@@ -16,10 +19,14 @@ export default function Landing() {
       {/* Navbar */}
       <nav className="border-b border-[var(--color-border)] py-4 px-6 md:px-12 flex justify-between items-center bg-white/80 backdrop-blur-md fixed top-0 w-full z-50">
         <div className="flex items-center space-x-2">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-dark)] flex items-center justify-center">
-            <Zap className="text-white w-5 h-5" />
-          </div>
-          <span className="text-xl font-heading font-bold text-[var(--color-text-primary)]">MiningEnergy</span>
+          {appLogo ? (
+            <img src={appLogo} alt="Logo" className="w-8 h-8 rounded-lg object-cover" />
+          ) : (
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-dark)] flex items-center justify-center">
+              <Zap className="text-white w-5 h-5" />
+            </div>
+          )}
+          <span className="text-xl font-heading font-bold text-[var(--color-text-primary)]">{appName}</span>
         </div>
         <div className="space-x-4 flex items-center">
           <Link to="/auth" className="text-sm font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors">
@@ -84,7 +91,7 @@ export default function Landing() {
       <section className="py-20 bg-[var(--color-bg)] px-6 md:px-12">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-heading font-bold text-[var(--color-text-primary)]">Why Choose MiningEnergy?</h2>
+            <h2 className="text-3xl md:text-4xl font-heading font-bold text-[var(--color-text-primary)]">Why Choose {appName}?</h2>
             <p className="text-[var(--color-text-secondary)] mt-4 max-w-2xl mx-auto">We eliminate the complexity of hardware setup, maintenance, and power costs, providing a seamless investment experience.</p>
           </div>
           

@@ -54,6 +54,8 @@ export type AppState = {
     upiId: string;
     payeeName: string;
   };
+  appName: string;
+  appLogo: string;
   
   // Actions
   login: (userData: Partial<User>) => void;
@@ -66,4 +68,6 @@ export type AppState = {
   addPlan: (plan: Omit<MiningPlan, 'id'>) => void;
   updatePlan: (id: string, plan: Partial<MiningPlan>) => void;
   deletePlan: (id: string) => void;
+  updateAppName: (name: string) => void;
+  updateAppLogo: (logo: string) => void;
 };

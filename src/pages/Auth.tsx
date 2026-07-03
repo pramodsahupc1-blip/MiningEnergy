@@ -11,6 +11,8 @@ export default function Auth() {
   const [password, setPassword] = useState('');
   
   const login = useStore(state => state.login);
+  const appName = useStore(state => state.appName);
+  const appLogo = useStore(state => state.appLogo);
   const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -27,10 +29,14 @@ export default function Auth() {
     <div className="min-h-screen bg-[var(--color-bg)] flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         <div className="flex flex-col items-center justify-center mb-8">
-          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-dark)] flex items-center justify-center mb-4 shadow-lg shadow-red-500/30">
-            <Zap className="text-white w-8 h-8" />
-          </div>
-          <h1 className="text-3xl font-heading font-bold text-[var(--color-text-primary)]">MiningEnergy</h1>
+          {appLogo ? (
+            <img src={appLogo} alt="Logo" className="w-16 h-16 rounded-2xl object-cover mb-4 shadow-lg shadow-black/10" />
+          ) : (
+            <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-dark)] flex items-center justify-center mb-4 shadow-lg shadow-red-500/30">
+              <Zap className="text-white w-8 h-8" />
+            </div>
+          )}
+          <h1 className="text-3xl font-heading font-bold text-[var(--color-text-primary)]">{appName}</h1>
           <p className="text-[var(--color-text-secondary)] mt-2 text-center">Secure Cloud Mining Platform</p>
         </div>
 

@@ -51,6 +51,8 @@ export const useStore = create<AppState>()(
         upiId: 'jinwoosung.jg@oksbi',
         payeeName: 'JINWOO SUNG'
       },
+      appName: 'MiningEnergy',
+      appLogo: '',
 
       login: (userData) => {
         set({
@@ -221,6 +223,12 @@ export const useStore = create<AppState>()(
         set((state) => ({
           miningPlans: state.miningPlans.filter(p => p.id !== id)
         }));
+      },
+      updateAppName: (name) => {
+        set({ appName: name });
+      },
+      updateAppLogo: (logo) => {
+        set({ appLogo: logo });
       }
     }),
     {
