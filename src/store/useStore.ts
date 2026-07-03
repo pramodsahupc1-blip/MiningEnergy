@@ -2,6 +2,10 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { AppState, MiningPlan, Transaction, ActiveContract } from '../types';
 
+import imgPlanA from '../assets/images/vip_series_a_candy_1782992923256.jpg';
+import imgPlanB from '../assets/images/vip_series_b_cookies_1782992945764.jpg';
+import imgPlanC from '../assets/images/vip_series_c_premium_1782992972411.jpg';
+
 const defaultPlans: MiningPlan[] = [
   {
     id: 'p1',
@@ -11,7 +15,7 @@ const defaultPlans: MiningPlan[] = [
     durationDays: 7,
     totalReturn: 6552,
     roiPercentage: 14560,
-    image: 'https://images.unsplash.com/photo-1621939514649-280e2ee25f60?q=80&w=300&auto=format&fit=crop' // Placeholder for biscuit
+    image: imgPlanA
   },
   {
     id: 'p2',
@@ -21,7 +25,7 @@ const defaultPlans: MiningPlan[] = [
     durationDays: 2,
     totalReturn: 6000,
     roiPercentage: 4000,
-    image: 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?q=80&w=300&auto=format&fit=crop' // Placeholder for biscuit
+    image: imgPlanB
   },
   {
     id: 'p3',
@@ -31,7 +35,7 @@ const defaultPlans: MiningPlan[] = [
     durationDays: 5,
     totalReturn: 37500,
     roiPercentage: 10714,
-    image: 'https://images.unsplash.com/photo-1590080875515-8a3a8dc5735e?q=80&w=300&auto=format&fit=crop'
+    image: imgPlanC
   }
 ];
 
@@ -197,6 +201,26 @@ export const useStore = create<AppState>()(
       
       updateUpiConfig: (upiId: string, payeeName: string) => {
         set({ upiConfig: { upiId, payeeName } });
+      },
+      addPlan: (plan) => {
+        set((state) => ({
+          miningPlans: [
+            ...state.miningPlans,
+            { ...plan, id: 'p' + Date.now() }
+          ]
+        }));
+      },
+      updatePlan: (id, updatedPlan) => {
+        set((state) => ({
+          miningPlans: state.miningPlans.map(p => 
+            p.id === id ? { ...p, ...updatedPlan } : p
+          )
+        }));
+      },
+      deletePlan: (id) => {
+        set((state) => ({
+          miningPlans: state.miningPlans.filter(p => p.id !== id)
+        }));
       }
     }),
     {

@@ -63,4 +63,7 @@ export type AppState = {
   purchasePlan: (planId: string) => boolean;
   simulateDailyIncome: () => void;
   updateUpiConfig: (upiId: string, payeeName: string) => void;
+  addPlan: (plan: Omit<MiningPlan, 'id'>) => void;
+  updatePlan: (id: string, plan: Partial<MiningPlan>) => void;
+  deletePlan: (id: string) => void;
 };
